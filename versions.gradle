@@ -1,0 +1,135 @@
+
+ext.deps = [:]
+def versions = [:]
+versions.android_gradle_plugin = '3.5.0'
+versions.appcompat = "1.1.0"
+versions.constraint_layout = "2.0.0-beta4"
+versions.core_ktx = "1.0.0"
+versions.dagger = "2.25.2"
+versions.glide = "4.10.0"
+versions.junit = "4.12"
+versions.kotlin_version = "1.3.50"
+versions.lifecycle = "2.2.0"
+versions.fragment_ktx = "2.2.0-alpha01"
+versions.okhttp_logging_interceptor = "4.2.1"
+versions.retrofit = "2.7.1"
+versions.rx_android = "2.1.1"
+versions.extensions = "2.1.0"
+versions.rxjava2 = "2.2.13"
+versions.support = "1.0.0"
+versions.material = "1.1.0-beta01"
+versions.timber = "4.7.1"
+versions.google_service = "4.3.3"
+versions.fireStore = "21.3.0"
+versions.analytics = "17.2.1"
+versions.circle_image_view = "3.0.1"
+versions.sticky_headers = "0.7.11"
+versions.rx_binding = "2.0.0"
+versions.coroutines = "1.3.3"
+ext.versions = versions
+
+
+def support = [:]
+support.annotations = "androidx.annotation:annotation:$versions.support"
+support.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
+support.recyclerview = "androidx.recyclerview:recyclerview:$versions.support"
+support.cardview = "androidx.cardview:cardview:$versions.support"
+support.design = "com.google.android.material:material:$versions.material"
+support.core_utils = "androidx.legacy:legacy-support-core-utils:$versions.support"
+support.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
+support.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.fragment_ktx"
+support.fragment_fragment_ktx = "androidx.fragment:fragment-ktx:1.2.2"
+deps.support = support
+
+def lifecycle = [:]
+def lifecycle_annotation_processor = [:]
+
+lifecycle_annotation_processor.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+
+lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
+lifecycle.java8 = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.extensions"
+
+deps.lifecycle = lifecycle
+deps.lifecycle_annotation_processor = lifecycle_annotation_processor
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
+
+def dagger = [:]
+dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
+deps.dagger = dagger
+
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin_version"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin_version"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version"
+
+deps.kotlin = kotlin
+
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+deps.junit = "junit:junit:$versions.junit"
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+
+def fireBase = [:]
+fireBase.google_services = "com.google.gms:google-services:$versions.google_service"
+fireBase.analytics = "com.google.firebase:firebase-analytics:$versions.analytics"
+fireBase.core = "com.google.firebase:firebase-core:$versions.analytics"
+fireBase.fireStore = "com.google.firebase:firebase-firestore:$versions.fireStore"
+deps.fireBase = fireBase
+
+def other = [:]
+other.circle_image_view = "de.hdodenhof:circleimageview:$versions.circle_image_view"
+other.sticky_headers = "org.zakariya.stickyheaders:stickyheaders:$versions.sticky_headers"
+deps.other = other
+
+def rx = [:]
+rx.binding_kotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rx_binding"
+deps.rx = rx
+
+def coroutine = [:]
+coroutine.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+coroutine.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+coroutine.integration = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$versions.coroutines"
+
+deps.coroutine = coroutine
+
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 21
+build_versions.target_sdk = 29
+build_versions.build_tools = "29.0.2"
+ext.build_versions = build_versions
+
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url 'https://plugins.gradle.org/m2/'}
+    handler.maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+}
+
+ext.addRepos = this.&addRepos
+
+
+

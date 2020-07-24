@@ -2,7 +2,8 @@ package com.muazekici.relaxingsounds.repositories.di
 
 import dagger.Module
 
-@Module
-abstract class RemoteDataSourceModule {
+
+@Module(includes = [RetrofitModule::class])
+class DataSourcesModule {
 
 }

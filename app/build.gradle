@@ -52,6 +52,7 @@ dependencies {
 
     deps.coroutine.each { k, v -> implementation v }
 
+    implementation deps.timber
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

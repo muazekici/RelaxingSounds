@@ -1,7 +1,8 @@
-package com.muazekici.relaxingsounds
+package com.muazekici.relaxingsounds.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.muazekici.relaxingsounds.R
 
 class MainActivity : AppCompatActivity() {
 

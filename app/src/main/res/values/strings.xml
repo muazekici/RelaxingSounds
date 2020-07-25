@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RelaxingSounds</string>
+    <string name="favorites">Favorites</string>
+    <string name="library">Library</string>
 </resources>

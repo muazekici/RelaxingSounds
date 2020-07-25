@@ -6,6 +6,8 @@ import com.muazekici.relaxingsounds.di.scopes.AppScope
 import com.muazekici.relaxingsounds.repositories.di.DataSourcesModule
 import com.muazekici.relaxingsounds.repositories.di.RepositoriesModule
 import com.muazekici.relaxingsounds.ui.main.MainActivity
+import com.muazekici.relaxingsounds.ui.main.di.MainActivityComponent
+import com.muazekici.relaxingsounds.ui.main.di.MainActivitySubComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -14,7 +16,8 @@ import dagger.Component
     modules = [
         AppModule::class,
         RepositoriesModule::class,
-        DataSourcesModule::class
+        DataSourcesModule::class,
+        MainActivitySubComponent::class
     ]
 )
 interface AppComponent {
@@ -25,5 +28,6 @@ interface AppComponent {
     }
 
     fun injectApplication(relaxingSoundsApplication: RelaxingSoundsApplication)
-    fun injectActivity(mainActivity: MainActivity)
+
+    fun mainActivityComponent(): MainActivityComponent.Factory
 }

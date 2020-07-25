@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.muazekici.relaxingsounds.di.qualifiers.ActivityContext
 import com.muazekici.relaxingsounds.di.scopes.ActivityScope
+import com.muazekici.relaxingsounds.ui.main.MainActivity
 import com.muazekici.relaxingsounds.ui.utils.RelaxingSoundsViewModelFactory
+import dagger.BindsInstance
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
@@ -16,6 +18,12 @@ import javax.inject.Provider
 @Subcomponent(modules = [MainActivityModule::class])
 interface MainActivityComponent {
 
+    @Subcomponent.Factory
+    interface Factory {
+        fun create(@BindsInstance activity: Activity): MainActivityComponent
+    }
+
+    fun injectActivity(mainActivity: MainActivity)
 }
 
 @Module(subcomponents = [MainActivityComponent::class])

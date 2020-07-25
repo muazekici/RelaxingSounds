@@ -35,7 +35,7 @@ class CategorySoundListAdapter(private val soundeSelected: (SoundItem) -> Unit) 
         val buttonLike = itemView.ButtonLike
 
         init {
-            buttonLike.setOnCheckedChangeListener { compoundButton, b ->
+            buttonLike.setOnCheckedChangeListener { _, b ->
                 if (b) {
                     soundeSelected(getItem(adapterPosition))
                 }
@@ -47,10 +47,10 @@ class CategorySoundListAdapter(private val soundeSelected: (SoundItem) -> Unit) 
 object CategorySoundItemDiffUtil : DiffUtil.ItemCallback<SoundItem>() {
 
     override fun areItemsTheSame(oldItem: SoundItem, newItem: SoundItem): Boolean {
-        return false
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: SoundItem, newItem: SoundItem): Boolean {
-        return false
+        return true
     }
 }

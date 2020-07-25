@@ -32,6 +32,6 @@ abstract class MainActivityViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(FavoritesViewModel::class)
-    abstract fun bindCategoryDetailViewModel(viewModel: FavoritesViewModel): ViewModel
+    abstract fun bindFavoritesViewModel(viewModel: FavoritesViewModel): ViewModel
 
 }

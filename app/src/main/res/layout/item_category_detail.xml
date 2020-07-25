@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/surface_inner_padding">
+
+        <TextView
+            android:id="@+id/TextTitleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_colon"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TextTitleCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_half"
+            android:text="@string/category_colon"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextSoundName" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/BarrierTitles"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="end"
+            app:barrierMargin="@dimen/dimen_half"
+            app:constraint_referenced_ids="TextTitleName,TextTitleCategory" />
+
+        <TextView
+            android:id="@+id/TextSoundName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/BarrierTitles"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/test_text" />
+
+        <TextView
+            android:id="@+id/TextSoundCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBaseline_toBaselineOf="@id/TextTitleCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/BarrierTitles"
+            tools:text="@string/test_text" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/BarrierDetails"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:barrierMargin="@dimen/dimen_full"
+            app:constraint_referenced_ids="TextTitleCategory,TextSoundCategory" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/ButtonLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_like"
+            android:gravity="center"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/BarrierDetails"
+            android:layout_margin="@dimen/dimen_full"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

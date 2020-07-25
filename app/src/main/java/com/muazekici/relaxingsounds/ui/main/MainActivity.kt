@@ -73,4 +73,13 @@ class MainActivity : AppCompatActivity() {
         }.commit()
     }
 
+
+    override fun onBackPressed() {
+        (supportFragmentManager.findFragmentById(R.id.FragmentContainer) as? NavigationHost)?.let {
+            if (!it.consumeBackPress()) {
+                super.onBackPressed()
+            }
+        } ?: super.onBackPressed()
+    }
+
 }

@@ -26,7 +26,7 @@ class FavoritesRepositoryImpl @Inject constructor(
             val responseAPI = async { mockAPI.getFavorites() }
             val responseLocal = async { appDB.favoriteSoundDAO().getAll() }
 
-            withContext(Dispatchers.Default) {
+            return@coroutineScope withContext(Dispatchers.Default) {
                 mutableListOf<SoundItem>().also {
                     it.addAll(SoundItemDTOList2SoundItemList.map(responseAPI.await()))
                     it.addAll(FavoriteSoundEntityList2SoundItemList.map(responseLocal.await()))

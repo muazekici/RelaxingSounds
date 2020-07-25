@@ -1,19 +1,42 @@
 package com.muazekici.relaxingsounds.ui.main.fragment_library.category_details_fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.muazekici.relaxingsounds.R
+import com.muazekici.relaxingsounds.ui.main.MainActivityComponent
+import com.muazekici.relaxingsounds.ui.main.dismissProgress
+import com.muazekici.relaxingsounds.ui.main.fragment_library.categories_fragment.CategoryViewModel
 import com.muazekici.relaxingsounds.ui.main.fragment_library.category_details_fragment.adapters.CategorySoundListAdapter
+import com.muazekici.relaxingsounds.ui.main.showProgress
 import com.muazekici.relaxingsounds.ui.utils.withArgs
 import com.muazekici.relaxingsounds.ui.widgets.MarginItemDecorator
+import com.muazekici.relaxingsounds.usecases.UseCaseResult
+import com.muazekici.relaxingsounds.usecases.ifSuccess
 import kotlinx.android.synthetic.main.fragment_category_details.*
+import javax.inject.Inject
 
 class CategoryDetailsFragment : Fragment(R.layout.fragment_category_details) {
 
     private var categoryId: Long = -1L
 
     private val categorySoundListAdapter by lazy {
-        CategorySoundListAdapter()
+        CategorySoundListAdapter {
+            categoryDetailViewModel.addFavorite(it)
+        }
+    }
+
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
+
+    private val categoryDetailViewModel by viewModels<CategoryDetailViewModel> { vmFactory }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.MainActivityComponent().injectCategoryDetailsFragment(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +49,16 @@ class CategoryDetailsFragment : Fragment(R.layout.fragment_category_details) {
         super.onActivityCreated(savedInstanceState)
         ListCategorySounds.adapter = categorySoundListAdapter
         ListCategorySounds.addItemDecoration(MarginItemDecorator(resources.getDimensionPixelSize(R.dimen.dimen_full)))
+
+        categoryDetailViewModel.getCategorySounds(categoryId)
+
+        categoryDetailViewModel.categorySounds.observe(viewLifecycleOwner) {
+            if (it is UseCaseResult.Loading) requireActivity().showProgress() else requireActivity().dismissProgress()
+
+            it.ifSuccess {
+                categorySoundListAdapter.submitList(it)
+            }
+        }
     }
 
     companion object {

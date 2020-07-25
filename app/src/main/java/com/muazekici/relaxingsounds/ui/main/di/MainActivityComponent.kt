@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.muazekici.relaxingsounds.di.qualifiers.ActivityContext
 import com.muazekici.relaxingsounds.di.scopes.ActivityScope
 import com.muazekici.relaxingsounds.ui.main.MainActivity
+import com.muazekici.relaxingsounds.ui.main.fragment_library.categories_fragment.CategoriesFragment
+import com.muazekici.relaxingsounds.ui.main.fragment_library.category_details_fragment.CategoryDetailsFragment
 import com.muazekici.relaxingsounds.ui.utils.RelaxingSoundsViewModelFactory
 import dagger.BindsInstance
 import dagger.Module
@@ -24,6 +26,9 @@ interface MainActivityComponent {
     }
 
     fun injectActivity(mainActivity: MainActivity)
+
+    fun injectCategoryFragment(categoryFragment: CategoriesFragment)
+    fun injectCategoryDetailsFragment(categoryDetailsFragment: CategoryDetailsFragment)
 }
 
 @Module(subcomponents = [MainActivityComponent::class])

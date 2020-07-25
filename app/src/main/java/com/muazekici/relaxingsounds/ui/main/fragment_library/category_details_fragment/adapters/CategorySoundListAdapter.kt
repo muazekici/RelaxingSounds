@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muazekici.relaxingsounds.R
 import com.muazekici.relaxingsounds.gateways_and_adapters.SoundItem
 import com.muazekici.relaxingsounds.ui.utils.inflateLayout
+import kotlinx.android.synthetic.main.item_category_detail.view.*
 
-class CategorySoundListAdapter :
+class CategorySoundListAdapter(private val soundeSelected: (SoundItem) -> Unit) :
     ListAdapter<SoundItem, CategorySoundListAdapter.CategorySoundItemViewHolder>(
         CategorySoundItemDiffUtil
     ) {
@@ -20,15 +21,26 @@ class CategorySoundListAdapter :
     }
 
     override fun onBindViewHolder(holder: CategorySoundItemViewHolder, position: Int) {
-
+        val item = getItem(position)
+        holder.also {
+            it.textCategoryName.text = item.category.typeName
+            it.textSoundName.text = item.name
+        }
     }
 
-    override fun getItemCount(): Int {
-        return 20
-    }
 
     inner class CategorySoundItemViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val textSoundName = itemView.TextSoundName
+        val textCategoryName = itemView.TextSoundCategory
+        val buttonLike = itemView.ButtonLike
 
+        init {
+            buttonLike.setOnCheckedChangeListener { compoundButton, b ->
+                if (b) {
+                    soundeSelected(getItem(adapterPosition))
+                }
+            }
+        }
     }
 }
 

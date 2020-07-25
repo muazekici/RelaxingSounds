@@ -5,7 +5,7 @@ import com.muazekici.relaxingsounds.RelaxingSoundsApplication
 import com.muazekici.relaxingsounds.di.scopes.AppScope
 import com.muazekici.relaxingsounds.repositories.di.DataSourcesModule
 import com.muazekici.relaxingsounds.repositories.di.RepositoriesModule
-import com.muazekici.relaxingsounds.ui.MainActivity
+import com.muazekici.relaxingsounds.ui.main.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 

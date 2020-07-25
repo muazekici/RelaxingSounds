@@ -1,4 +1,4 @@
-package com.muazekici.relaxingsounds.ui
+package com.muazekici.relaxingsounds.ui.main
 
 import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import androidx.appcompat.app.AppCompatActivity

@@ -48,7 +48,10 @@ dependencies {
     implementation deps.okhttp_logging_interceptor
 
     deps.lifecycle.each { k, v -> implementation v }
-    deps.lifecycle_annotation_processor.each { k, v -> annotationProcessor v }
+    deps.lifecycle_annotation_processor.each { k, v -> kapt v }
+
+    deps.room.each { k, v -> implementation v }
+    deps.roomAnnotation.each { k, v -> kapt v }
 
     deps.coroutine.each { k, v -> implementation v }
 

@@ -26,6 +26,7 @@ versions.circle_image_view = "3.0.1"
 versions.sticky_headers = "0.7.11"
 versions.rx_binding = "2.0.0"
 versions.coroutines = "1.3.3"
+versions.room_version = "2.2.5"
 ext.versions = versions
 
 
@@ -112,6 +113,16 @@ coroutine.integration = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:
 
 deps.coroutine = coroutine
 
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room_version"
+room.ktx = "androidx.room:room-ktx:$versions.room_version"
+
+deps.room = room
+
+def roomAnnotation = [:]
+roomAnnotation.annotation = "androidx.room:room-compiler:$versions.room_version"
+
+deps.roomAnnotation = roomAnnotation
 ext.deps = deps
 
 def build_versions = [:]

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="surface_inner_padding">10dp</dimen>
+    <dimen name="dimen_half">4dp</dimen>
+    <dimen name="dimen_full">8dp</dimen>
+    <dimen name="dimen_full2">16dp</dimen>
+</resources>

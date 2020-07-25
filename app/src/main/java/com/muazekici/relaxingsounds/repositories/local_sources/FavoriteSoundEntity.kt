@@ -17,7 +17,7 @@ interface FavoriteSoundDao {
     suspend fun getAll(): List<FavoriteSoundEntity>
 
     @Query("SELECT * FROM favorites WHERE id IN (:soundIds)")
-    suspend fun getAllWithIds(soundIds: List<Long>)
+    suspend fun getAllWithIds(soundIds: List<Long>): List<FavoriteSoundEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favoriteSoundEntity: FavoriteSoundEntity)

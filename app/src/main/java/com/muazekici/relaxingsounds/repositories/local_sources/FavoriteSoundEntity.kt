@@ -26,7 +26,7 @@ interface FavoriteSoundDao {
     suspend fun delete(favoriteSoundEntity: FavoriteSoundEntity)
 }
 
-@Database(entities = [FavoriteSoundEntity::class], version = 4, exportSchema = false)
+@Database(entities = [FavoriteSoundEntity::class], version = 5, exportSchema = false)
 abstract class AppDB : RoomDatabase() {
     abstract fun favoriteSoundDAO(): FavoriteSoundDao
 }

@@ -1,25 +1,18 @@
 package com.muazekici.relaxingsounds.ui.main
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.lifecycleScope
 import com.muazekici.relaxingsounds.R
 import com.muazekici.relaxingsounds.RelaxingSoundsApplication
-import com.muazekici.relaxingsounds.gateways_and_adapters.repositories.CategoriesRepository
-import com.muazekici.relaxingsounds.gateways_and_adapters.repositories.FavoritesRepository
+import com.muazekici.relaxingsounds.ui.main.di.MainActivityComponent
 import com.muazekici.relaxingsounds.ui.main.fragment_favorites.FavoritesFragment
 import com.muazekici.relaxingsounds.ui.main.fragment_library.LibraryFragmentContainer
 import com.muazekici.relaxingsounds.ui.navigation.NavigationHost
-import com.muazekici.relaxingsounds.ui.navigation.NavigationHostActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +23,16 @@ class MainActivity : AppCompatActivity() {
         { LibraryFragmentContainer() }
     )
 
+    var progressDialog: ProgressDialog? = null
+
+    @Inject
+    lateinit var activityComponent: MainActivityComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        activityComponent =
+            (application as RelaxingSoundsApplication).appComponent.mainActivityComponent()
+                .create(this).also {
+                }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -82,4 +84,21 @@ class MainActivity : AppCompatActivity() {
         } ?: super.onBackPressed()
     }
 
+}
+
+fun Context.MainActivityComponent(): MainActivityComponent {
+    return (this as MainActivity).activityComponent
+}
+
+fun Activity.showProgress() {
+    (this as MainActivity).let {
+        if (it.progressDialog == null) it.progressDialog = ProgressDialog(this)
+        it.progressDialog?.let { it.show() }
+    }
+}
+
+fun Activity.dismissProgress() {
+    (this as MainActivity).let {
+        it.progressDialog?.let { it.dismiss() }
+    }
 }

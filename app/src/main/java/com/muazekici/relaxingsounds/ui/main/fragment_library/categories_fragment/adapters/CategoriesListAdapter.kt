@@ -9,6 +9,7 @@ import com.muazekici.relaxingsounds.R
 import com.muazekici.relaxingsounds.gateways_and_adapters.Category
 import com.muazekici.relaxingsounds.gateways_and_adapters.CategoryType
 import com.muazekici.relaxingsounds.ui.utils.inflateLayout
+import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoriesListAdapter(private val categorySelected: (Category) -> Unit) :
     ListAdapter<Category, CategoriesListAdapter.CategoryTypeItemViewHolder>(CategoryItemDiffUtil) {
@@ -18,16 +19,17 @@ class CategoriesListAdapter(private val categorySelected: (Category) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: CategoryTypeItemViewHolder, position: Int) {
+        holder.textCategoryName.text = getItem(position).name
     }
 
-    override fun getItemCount(): Int {
-        return 10
-    }
 
     inner class CategoryTypeItemViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+
+        val textCategoryName = itemView.TextCategoryName
+
         init {
             itemView.setOnClickListener {
-                categorySelected(Category(1L, "test"))/*categorySelected(getItem(adapterPosition))*/
+                categorySelected(getItem(adapterPosition))
             }
         }
     }

@@ -16,7 +16,7 @@ class DataSourcesModule {
     @Provides
     @AppScope
     fun provideDbInstance(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, AppDB::class.java, DB_NAME).build()
+        Room.databaseBuilder(context, AppDB::class.java, DB_NAME).fallbackToDestructiveMigration().build()
 
 }
 

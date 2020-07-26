@@ -24,11 +24,11 @@ class SoundPoolManager @Inject constructor() : MediaPlayerStateListener {
 
     }
 
-    fun startSound(sound: Sound): Boolean {
+    fun startSound(id: Long, url: String, volume: Float): Boolean {
         if (emptyPlayers.size > 0) {
             emptyPlayers.removeAt(0).also {
-                occupiedPlayerSet[sound.soundId] = it
-                it.playSound(sound.soundUrl, sound.soundId)
+                occupiedPlayerSet[id] = it
+                it.playSound(url, id, volume)
             }
             return true
         }
@@ -36,10 +36,26 @@ class SoundPoolManager @Inject constructor() : MediaPlayerStateListener {
     }
 
 
-    fun stopSound(sound: Sound) {
-        occupiedPlayerSet.remove(sound.soundId)?.let {
+    fun stopSound(id: Long) {
+        occupiedPlayerSet.remove(id)?.let {
             it.recyclePlayer()
             emptyPlayers.add(it)
+        }
+    }
+
+    fun checkSound(id: Long): Pair<Long, Float>? {
+        occupiedPlayerSet[id]?.let {
+            it.currentSound?.let {
+                return Pair(it.soundId, it.volume)
+            }
+            return null
+        }
+        return null
+    }
+
+    fun changeVolumeSound(id: Long, volume: Float) {
+        occupiedPlayerSet[id]?.let {
+            it.changeVolume(volume)
         }
     }
 

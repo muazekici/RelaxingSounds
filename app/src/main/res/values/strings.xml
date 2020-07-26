@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RelaxingSounds</string>
+    <string name="favorites">Favorites</string>
+    <string name="library">Library</string>
+    <string name="name_colon">Name :</string>
+    <string name="category_colon">Category :</string>
+    <string name="test_text">test test test test test test test test test test test test</string>
 </resources>

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "category": "Bird",
+    "name": "Geese",
+    "sourceUrl": "https://storage.googleapis.com/demo_sounds/geese_sound.mp3"
+  },
+  {
+    "id": 2,
+    "category": "Bird",
+    "name": "Chaffinch",
+    "sourceUrl": "https://storage.googleapis.com/demo_sounds/chaffinch_sound.mp3"
+  },
+  {
+    "id": 3,
+    "category": "Bird",
+    "name": "Blackbird",
+    "sourceUrl": "https://storage.googleapis.com/demo_sounds/blackbird_sound.mp3"
+  }
+]

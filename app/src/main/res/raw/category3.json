@@ -1,0 +1,20 @@
+[
+  {
+    "id": 7,
+    "category": "Nature",
+    "name": "Heavy Rain",
+    "sourceUrl": "https://storage.googleapis.com/demo_sounds/heavy_rain.mp3"
+  },
+  {
+    "id": 8,
+    "category": "Nature",
+    "name": "Lightning",
+    "sourceUrl": "https://storage.googleapis.com/demo_sounds/lightning.mp3"
+  },
+  {
+    "id": 9,
+    "category": "Nature",
+    "name": "Rain on Roof",
+    "sourceUrl": "https://storage.googleapis.com/demo_sounds/rain_on_roof.mp3"
+  }
+]

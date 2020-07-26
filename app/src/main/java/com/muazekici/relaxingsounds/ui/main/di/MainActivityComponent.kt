@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.muazekici.relaxingsounds.di.qualifiers.ActivityContext
 import com.muazekici.relaxingsounds.di.scopes.ActivityScope
 import com.muazekici.relaxingsounds.ui.main.MainActivity
+import com.muazekici.relaxingsounds.ui.main.fragment_favorites.FavoritesFragment
 import com.muazekici.relaxingsounds.ui.main.fragment_library.categories_fragment.CategoriesFragment
 import com.muazekici.relaxingsounds.ui.main.fragment_library.category_details_fragment.CategoryDetailsFragment
 import com.muazekici.relaxingsounds.ui.utils.RelaxingSoundsViewModelFactory
@@ -29,6 +30,7 @@ interface MainActivityComponent {
 
     fun injectCategoryFragment(categoryFragment: CategoriesFragment)
     fun injectCategoryDetailsFragment(categoryDetailsFragment: CategoryDetailsFragment)
+    fun injectFavoritesFragment(favoritesFragment: FavoritesFragment)
 }
 
 @Module(subcomponents = [MainActivityComponent::class])

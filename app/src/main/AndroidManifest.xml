@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.muazekici.relaxingsounds">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".RelaxingSoundsApplication"
         android:allowBackup="false"

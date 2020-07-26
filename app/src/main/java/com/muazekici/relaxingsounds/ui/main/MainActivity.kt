@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(ToolbarMain)
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.FragmentContainer, fragmentCreators[0](), tabTags[0])
@@ -82,6 +84,11 @@ class MainActivity : AppCompatActivity() {
                 super.onBackPressed()
             }
         } ?: super.onBackPressed()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
 }

@@ -2,6 +2,7 @@ package com.muazekici.relaxingsounds.ui.main.fragment_library.categories_fragmen
 
 import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -23,7 +24,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
 
     private val categoriesListAdapter by lazy {
         CategoriesListAdapter {
-            showInParentHost(CategoryDetailsFragment.newInstance(it.id), true)
+            showInParentHost(CategoryDetailsFragment.newInstance(it.id, it.name), true)
         }
     }
 
@@ -48,6 +49,14 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
             it.ifSuccess {
                 categoriesListAdapter.submitList(it)
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.let {
+            it.title = "Categories"
+            it.setDisplayHomeAsUpEnabled(false)
         }
     }
 }

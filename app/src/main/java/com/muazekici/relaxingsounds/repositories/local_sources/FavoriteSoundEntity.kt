@@ -1,6 +1,7 @@
 package com.muazekici.relaxingsounds.repositories.local_sources
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "favorites")
 data class FavoriteSoundEntity(
@@ -16,6 +17,9 @@ interface FavoriteSoundDao {
     @Query("SELECT * FROM favorites")
     suspend fun getAll(): List<FavoriteSoundEntity>
 
+    @Query("SELECT * FROM favorites")
+    fun getAllFlow(): Flow<List<FavoriteSoundEntity>>
+
     @Query("SELECT * FROM favorites WHERE id IN (:soundIds)")
     suspend fun getAllWithIds(soundIds: List<Long>): List<FavoriteSoundEntity>
 
@@ -26,7 +30,7 @@ interface FavoriteSoundDao {
     suspend fun delete(favoriteSoundEntity: FavoriteSoundEntity)
 }
 
-@Database(entities = [FavoriteSoundEntity::class], version = 5, exportSchema = false)
+@Database(entities = [FavoriteSoundEntity::class], version = 7, exportSchema = false)
 abstract class AppDB : RoomDatabase() {
     abstract fun favoriteSoundDAO(): FavoriteSoundDao
 }

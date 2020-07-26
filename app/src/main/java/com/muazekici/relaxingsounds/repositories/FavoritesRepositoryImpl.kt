@@ -12,6 +12,7 @@ import com.muazekici.relaxingsounds.repositories.util.toTypeName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -36,6 +37,18 @@ class FavoritesRepositoryImpl @Inject constructor(
 
     }
 
+    override fun getFavoriteFlow() =
+        appDB.favoriteSoundDAO().getAllFlow()
+            .map {
+                FavoriteSoundEntityList2SoundItemList.map(it)
+            }
+            .flowOn(Dispatchers.Default)
+            .combine(flow { emit(mockAPI.getFavorites()) }) { a, b ->
+                a + SoundItemDTOList2SoundItemList.map(b)
+            }
+            .flowOn(Dispatchers.Default)
+
+
     override suspend fun addFavorite(soundItem: SoundItem) {
         appDB.favoriteSoundDAO().insert(
             FavoriteSoundEntity(
@@ -48,6 +61,13 @@ class FavoritesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun removeFavorite(soundItem: SoundItem) {
-
+        appDB.favoriteSoundDAO().delete(
+            FavoriteSoundEntity(
+                soundItem.id,
+                soundItem.category.toTypeName(),
+                soundItem.name,
+                soundItem.sourceUrl
+            )
+        )
     }
 }

@@ -2,6 +2,7 @@ package com.muazekici.relaxingsounds.ui.main.fragment_library.category_details_f
 
 import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +23,7 @@ import javax.inject.Inject
 class CategoryDetailsFragment : Fragment(R.layout.fragment_category_details) {
 
     private var categoryId: Long = -1L
+    private lateinit var categoryName: String
 
     private val categorySoundListAdapter by lazy {
         CategorySoundListAdapter {
@@ -42,6 +44,7 @@ class CategoryDetailsFragment : Fragment(R.layout.fragment_category_details) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         categoryId = requireArguments().getLong(CATEGORY_ID_KEY)
+        categoryName = requireArguments().getString(CATEGORY_NAME_KEY)!!
     }
 
 
@@ -61,14 +64,24 @@ class CategoryDetailsFragment : Fragment(R.layout.fragment_category_details) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.let {
+            it.title = categoryName
+            it.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
     companion object {
 
-        fun newInstance(categoryId: Long): CategoryDetailsFragment {
+        fun newInstance(categoryId: Long, categoryName: String): CategoryDetailsFragment {
             return CategoryDetailsFragment().withArgs {
                 putLong(CATEGORY_ID_KEY, categoryId)
+                putString(CATEGORY_NAME_KEY, categoryName)
             }
         }
 
         private const val CATEGORY_ID_KEY = "CategoryIdKey"
+        private const val CATEGORY_NAME_KEY = "CategoryNameKey"
     }
 }

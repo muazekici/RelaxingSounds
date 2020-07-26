@@ -7,7 +7,9 @@ class RecyclablePlayer(private val mediaPlayerStateListener: MediaPlayerStateLis
 
     private val mediaPlayer = MediaPlayer()
 
-    private var currentSound: Sound? = null
+    var currentSound: Sound? = null
+        private set
+
 
     init {
         mediaPlayer.setOnPreparedListener(this)
@@ -15,10 +17,11 @@ class RecyclablePlayer(private val mediaPlayerStateListener: MediaPlayerStateLis
         mediaPlayer.isLooping = true
     }
 
-    fun playSound(soundUrl: String, soundId: Long) {
-        currentSound = Sound(soundUrl, soundId)
+    fun playSound(soundUrl: String, soundId: Long, volume: Float) {
+        currentSound = Sound(soundUrl, soundId, volume)
         mediaPlayer.setDataSource(soundUrl)
         mediaPlayer.prepareAsync()
+        mediaPlayer.setVolume(volume, volume)
     }
 
     override fun onPrepared(p0: MediaPlayer?) {
@@ -34,6 +37,11 @@ class RecyclablePlayer(private val mediaPlayerStateListener: MediaPlayerStateLis
     fun recyclePlayer() {
         currentSound = null
         mediaPlayer.reset()
+    }
+
+    fun changeVolume(volume: Float) {
+        currentSound?.volume = volume
+        mediaPlayer.setVolume(volume, volume)
     }
 
 
